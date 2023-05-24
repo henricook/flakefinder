@@ -12,7 +12,7 @@ libraryDependencies += guice
 libraryDependencies ++= List(
   // Cats
   "org.typelevel" %% "cats-core"   % "2.9.0" withJavadoc (),
-  "org.typelevel" %% "cats-effect" % "3.4.10",
+  "org.typelevel" %% "cats-effect" % "3.4.11",
 
   // XML Parsing
   "ru.tinkoff" %% "phobos-core" % "0.20.0",
