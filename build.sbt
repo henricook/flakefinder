@@ -15,7 +15,7 @@ libraryDependencies ++= List(
   "org.typelevel" %% "cats-effect" % "3.4.10",
 
   // XML Parsing
-  "ru.tinkoff" %% "phobos-core" % "0.20.0",
+  "ru.tinkoff" %% "phobos-core" % "0.21.0",
 
   // Database
   "org.tpolecat"  %% "doobie-core"     % "1.0.0-RC1",
