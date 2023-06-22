@@ -18,9 +18,9 @@ libraryDependencies ++= List(
   "ru.tinkoff" %% "phobos-core" % "0.20.0",
 
   // Database
-  "org.tpolecat"  %% "doobie-core"     % "1.0.0-RC1",
-  "org.tpolecat"  %% "doobie-hikari"   % "1.0.0-RC1", // HikariCP transactor.
-  "org.tpolecat"  %% "doobie-postgres" % "1.0.0-RC1", // Postgres driver 42.3.1 + type mappings.
+  "org.tpolecat"  %% "doobie-core"     % "1.0.0-RC4",
+  "org.tpolecat"  %% "doobie-hikari"   % "1.0.0-RC4", // HikariCP transactor.
+  "org.tpolecat"  %% "doobie-postgres" % "1.0.0-RC4", // Postgres driver 42.3.1 + type mappings.
   "org.postgresql" % "postgresql"      % "42.6.0",
 
   // Test
