@@ -11,7 +11,8 @@ import javax.inject._
 import scala.concurrent.ExecutionContext.Implicits.global
 
 @Singleton
-class StatsController @Inject()(val controllerComponents: ControllerComponents, junitService: JUnitService) extends BaseController {
+class StatsController @Inject() (val controllerComponents: ControllerComponents, junitService: JUnitService)
+    extends BaseController {
 
   def getSummary(organisationId: String): Action[AnyContent] = Action.async { implicit request: Request[AnyContent] =>
     val result = junitService.getSummary(organisationId)

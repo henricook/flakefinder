@@ -21,14 +21,20 @@ case class TestSuiteRepository @Inject() (config: Configuration) {
   val dbConfig = config.get[DBConfig]("db")
 
   val xa = Transactor.fromDriverManager[IO](
-    driver = "org.postgresql.Driver",       // driver classname
+    driver = "org.postgresql.Driver",                                // driver classname
     url    = s"jdbc:postgresql://${dbConfig.host}:5432/flakefinder", // connect URL (driver-specific)
-    user   = dbConfig.username,             // user
-    pass   = dbConfig.password,             // password
+    user   = dbConfig.username,                                      // user
+    pass   = dbConfig.password,                                      // password
   )
 
-  def load(organisationId: String, buildId: String, rootFeatureFileName: String, xml: JUnitXMLDto): ConnectionIO[Unit] = {
-    val sql = """INSERT INTO test_cases (organisation_id, suite_name, feature_file_name, timestamp, run_time, build_id, test_name, test_time, test_pass, failure_message) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"""
+  def load(
+    organisationId: String,
+    buildId: String,
+    rootFeatureFileName: String,
+    xml: JUnitXMLDto,
+  ): ConnectionIO[Unit] = {
+    val sql =
+      """INSERT INTO test_cases (organisation_id, suite_name, feature_file_name, timestamp, run_time, build_id, test_name, test_time, test_pass, failure_message) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"""
 
     val dtos = TestCaseDto.fromModel(xml, organisationId, buildId, rootFeatureFileName)
 
@@ -36,7 +42,7 @@ case class TestSuiteRepository @Inject() (config: Configuration) {
   }
 
   def getSummary(organisationId: String): ConnectionIO[List[TestSummaryDto]] = {
-      sql""" SELECT test_name,
+    sql""" SELECT test_name,
              feature_file_name,
              COUNT(CASE WHEN test_pass=true THEN 1 END) AS passes,
              COUNT(CASE WHEN test_pass=false THEN 1 END) AS failures,
