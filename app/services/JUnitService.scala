@@ -13,9 +13,8 @@ import repositories.TestSuiteRepository
 
 import javax.inject.Singleton
 
-
 @Singleton
-case class JUnitService @Inject()(testSuiteRepo: TestSuiteRepository, config: Configuration) {
+case class JUnitService @Inject() (testSuiteRepo: TestSuiteRepository, config: Configuration) {
 
   val dbConfig = config.get[DBConfig]("db")
 
@@ -27,11 +26,17 @@ case class JUnitService @Inject()(testSuiteRepo: TestSuiteRepository, config: Co
     logger.info(s"Parsing XML for organisationId $organisationId / buildId: $buildId")
 
     // Filter out suites with 0 tests
-    val rootTestSuite = xml.testsuite.filter(_.testcase.size === 0) // This contains the name of the overall feature file
+    val rootTestSuite =
+      xml.testsuite.filter(_.testcase.size === 0) // This contains the name of the overall feature file
     val rootFeatureFileName = rootTestSuite.headOption.flatMap(_.file).getOrElse("Unknown").split("/").last
-    val filteredTestSuites = xml.testsuite.filter(_.testcase.size =!= 0)
+    val filteredTestSuites  = xml.testsuite.filter(_.testcase.size =!= 0)
 
-    val result = testSuiteRepo.load(organisationId, buildId, rootFeatureFileName, xml.copy(testsuite = filteredTestSuites)).transact(xa)
+    val result = testSuiteRepo.load(
+      organisationId,
+      buildId,
+      rootFeatureFileName,
+      xml.copy(testsuite = filteredTestSuites),
+    ).transact(xa)
 
     logger.info(s"Done parsing XML for organisationId $organisationId / buildId: $buildId")
 
