@@ -6,8 +6,8 @@ import ru.tinkoff.phobos.syntax._
 import ru.tinkoff.phobos.derivation.semiauto._
 
 case class JUnitXMLDto(
-                      testsuite: List[TestSuiteXMLDto]
-                      )
+  testsuite: List[TestSuiteXMLDto]
+)
 
 object JUnitXMLDto {
   implicit val xmlEncoder: XmlEncoder[JUnitXMLDto] = deriveXmlEncoder("testsuites")
