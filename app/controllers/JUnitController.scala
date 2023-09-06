@@ -11,18 +11,19 @@ import javax.inject._
 import scala.concurrent.ExecutionContext.Implicits.global
 
 @Singleton
-class JUnitController @Inject()(val controllerComponents: ControllerComponents, junitService: JUnitService) extends BaseController {
+class JUnitController @Inject() (val controllerComponents: ControllerComponents, junitService: JUnitService)
+    extends BaseController {
 
-  def load(): Action[JUnitContentDto] = Action.async(parse.json[JUnitContentDto]) { implicit request: Request[JUnitContentDto] =>
-    XmlDecoder[JUnitXMLDto].decode(request.body.xml) match {
-      case Left(err) => throw new Exception(s"Unexpected error: expected Right(...) but got Left($err)")
-      case Right(xml) =>
+  def load(): Action[JUnitContentDto] =
+    Action.async(parse.json[JUnitContentDto]) { implicit request: Request[JUnitContentDto] =>
+      XmlDecoder[JUnitXMLDto].decode(request.body.xml) match {
+        case Left(err)  => throw new Exception(s"Unexpected error: expected Right(...) but got Left($err)")
+        case Right(xml) =>
+          val result = junitService.load(request.body.organisationId, request.body.buildId, xml)
 
-        val result = junitService.load(request.body.organisationId, request.body.buildId, xml)
-
-        result.unsafeToFuture()(implicits.global).map { _ =>
-          Ok("> Loaded")
-        }
+          result.unsafeToFuture()(implicits.global).map { _ =>
+            Ok("> Loaded")
+          }
+      }
     }
-  }
 }
