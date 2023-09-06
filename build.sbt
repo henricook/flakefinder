@@ -25,7 +25,7 @@ libraryDependencies ++= List(
 
   // Test
   "com.lihaoyi"            %% "pprint"             % "0.8.1"   % Test,
-  "org.mockito"            %% "mockito-scala"      % "1.17.14" % Test,
+  "org.mockito"            %% "mockito-scala"      % "1.17.22" % Test,
   "org.scalatest"          %% "scalatest"          % "3.2.15"  % Test,
 )
 
