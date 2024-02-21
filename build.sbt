@@ -21,7 +21,7 @@ libraryDependencies ++= List(
   "org.tpolecat"  %% "doobie-core"     % "1.0.0-RC1",
   "org.tpolecat"  %% "doobie-hikari"   % "1.0.0-RC1", // HikariCP transactor.
   "org.tpolecat"  %% "doobie-postgres" % "1.0.0-RC1", // Postgres driver 42.3.1 + type mappings.
-  "org.postgresql" % "postgresql"      % "42.6.0",
+  "org.postgresql" % "postgresql"      % "42.6.1",
 
   // Test
   "com.lihaoyi"            %% "pprint"             % "0.8.1"   % Test,
