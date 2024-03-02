@@ -1,4 +1,4 @@
-addSbtPlugin("com.typesafe.play" % "sbt-plugin" % "2.8.19")
+addSbtPlugin("com.typesafe.play" % "sbt-plugin" % "2.9.2")
 
 addCompilerPlugin("com.olegpy" %% "better-monadic-for" % "0.3.1")
 
